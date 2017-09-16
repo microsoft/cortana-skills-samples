@@ -17,7 +17,7 @@ namespace HelloWorldSkill.Dialogs
 
 		private async Task MessageReceivedAsync(IDialogContext context, IAwaitable<object> result)
 		{
-			await context.SayAsync("Hello World!");
+			await context.SayAsync("Hello World!","Hello World!");
 
 			context.Wait(MessageReceivedAsync);
 		}
