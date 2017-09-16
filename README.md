@@ -1,3 +1,41 @@
+# Cortana Skills Kit
+
+The **Cortana Skills Kit** is a suite of tools that helps you build custom, intelligent, personalized experiences for your users by empowering Cortana with new capabilities (or **skills**).
+
+>Note: Cortana Skills Kit is currently in public preview.
+
+Cortana skills can be built using the **Microsoft Bot Framework**. The Framework enables you to build conversational experiences that support different types of interactions with users. You can design freeform or guided interactions using simple text strings, speech or use complex rich cards that contain text, images, audio and action buttons.
+
+Cortana Skills Kit also enables you to **personalize skill experiences** for your users by requesting for and leveraging contextual data like the user profile and location information.
+
+*   Review the [Cortana Skills Kit documentation](https://docs.microsoft.com/en-us/cortana/getstarted) to get started!
+*   Refer to the [Bot Framework documentation](https://docs.microsoft.com/en-us/bot-framework/) to create great conversational experiences
+*   .NET and Node.js developers can take advantage of the [Bot Builder SDK](https://docs.microsoft.com/en-us/bot-framework/dotnet/bot-builder-dotnet-overview) to start creating Skills
+*   Use the [Azure Free Trial](https://azure.microsoft.com/en-us/free/) to start free and keep going free - regardless of your subscription type
+
+You can add **natural language understanding** to your skill by using the [Language Understanding Intelligent Service (LUIS)](https://www.luis.ai/), which uses the power of machine learning to help extract meaning from natural language input. A LUIS app takes a user utterance and extracts intents and entities that correspond to activities in your skill.
+
+# Samples
+
+In this repository, you will find task-focused samples to help you build skills for Cortana.
+
+Sample | Description | C#
+------------ | ------------- | :-----------:
+Hello World | A basic Hello World skill. | [View Sample](/botframework/botbuilder/CSharp/core-HelloWorldSkill) [![Deploy to Azure][Deploy Button]][Deploy CSharp/core-HelloWorldSkill]
+
+[Deploy Button]: https://azuredeploy.net/deploybutton.png
+[Deploy CSharp/core-HelloWorldSkill]: https://azuredeploy.net?repository=https://github.com/microsoft/cortana-skills-samples/tree/master/botframework/botbuilder/CSharp/core-HelloWorldSkill
+
+# Support
+
+These resources provide additional information and support for developing Cortana Skills.
+
+|Support type                    | Contact                                                
+|----------------------------|---------------------------------
+|**Community support** | [StackOverflow](https://stackoverflow.com/questions/tagged/cortana-skills-kit)
+|**Using a Cortana Skill** | Contact the skill developer through their publisher e-mail                 
+|**Bot Builder SDK issues/suggestions**| Use the issues tab on the <a href="https://github.com/Microsoft/BotBuilder/" target="_blank">GitHub repo</a>
+|**Reporting abuse**| Contact us at [csk-reports@microsoft.com](mailto://csk-reports@microsoft.com)
 
 # Contributing
 
