@@ -19,12 +19,21 @@ You can add **natural language understanding** to your skill by using the [Langu
 
 In this repository, you will find task-focused samples to help you build skills for Cortana.
 
-Sample | Description | C#
+## CSharp ##
+Sample | Description | Action 
 ------------ | ------------- | :-----------:
-Hello World | A basic Hello World skill. | [View Sample](/botframework/botbuilder/CSharp/core-HelloWorldSkill) [![Deploy to Azure][Deploy Button]][Deploy CSharp/core-HelloWorldSkill]
+AdaptiveCards | Demonstrate how to build an adaptive card and respond to a submit action | [View Sample](/CSharp/AdaptiveCards)
+Hello World | A basic Hello World skill. | [View Sample](/CSharp/HelloWorldSkill)
+BirthdayCountdown | Demonstrate OAuth Graph connection to get information from contacts  | [View Sample](/CSharp/BirthdayCountdownCS)
 
-[Deploy Button]: https://azuredeploy.net/deploybutton.png
-[Deploy CSharp/core-HelloWorldSkill]: https://azuredeploy.net?repository=https://github.com/microsoft/cortana-skills-samples/tree/master/botframework/botbuilder/CSharp/core-HelloWorldSkill
+
+
+## Node ##
+Sample | Description | Action 
+------------ | ------------- | :-----------:
+BirthdayCountdown | Demonstrate OAuth Graph connection to get information from contacts |  [View Sample](/Node/BirthdayCountdown)
+MapSearch | Demonstrate deep link into Microsoft Map to search a location (and check device has a screen) |  [View Sample](/Node/MapSearch)
+
 
 # Support
 
