@@ -24,7 +24,7 @@ Sample | Description | Action
 ------------ | ------------- | :-----------:
 AdaptiveCards | Demonstrate how to build an adaptive card and respond to a submit action | [View Sample](/CSharp/AdaptiveCards)
 Hello World | A basic Hello World skill. | [View Sample](/CSharp/HelloWorldSkill)
-BirthdayCountdown | Demonstrate OAuth Graph connection to get information from contacts  | [View Sample](/CSharp/BirthdayCountdownCS)
+BirthdayCountdown | Demonstrate OAuth Graph connection to get information from contacts  | [View Sample](/CSharp/BirthdayCountdown)
 
 
 
