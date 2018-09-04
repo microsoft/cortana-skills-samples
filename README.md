@@ -20,19 +20,21 @@ You can add **natural language understanding** to your skill by using the [Langu
 In this repository, you will find task-focused samples to help you build skills for Cortana.
 
 ## CSharp ##
-Sample | Description | Action 
+Task | Description | Action 
 ------------ | ------------- | :-----------:
-AdaptiveCards | Demonstrate how to build an adaptive card and respond to a submit action | [View Sample](/CSharp/AdaptiveCards)
-Hello World | A basic Hello World skill. | [View Sample](/CSharp/HelloWorldSkill)
-BirthdayCountdown | Demonstrate OAuth Graph connection to get information from contacts  | [View Sample](/CSharp/BirthdayCountdown)
+Adaptive Cards | Demonstrate how to build an adaptive card and respond to a submit action | [View Sample](/CSharp/AdaptiveCards)
+Getting Started | A basic Hello World skill. | [View Sample](/CSharp/HelloWorldSkill)
+OAuth V2 | Demonstrate configuration of OAuth to get an Authorization token  | [View Sample](/CSharp/OAuthv2)
+OAuth & Graph | Demonstrate OAuth to Graph connection to get information from Outlook contacts  | [View Sample](/CSharp/BirthdayCountdown)
 
 
 
 ## Node ##
-Sample | Description | Action 
+Task | Description | Action 
 ------------ | ------------- | :-----------:
-BirthdayCountdown | Demonstrate OAuth Graph connection to get information from contacts |  [View Sample](/Node/BirthdayCountdown)
-MapSearch | Demonstrate deep link into Microsoft Map to search a location (and check device has a screen) |  [View Sample](/Node/MapSearch)
+Deep Links | Demonstrate deep linking into Microsoft Map (on Windows 10) to search a location (and check device has a screen) |  [View Sample](/Node/MapSearch)
+OAuth V2 | Demonstrate OAuth Graph connection to get information from contacts |  [View Sample](/Node/OAuthv2)
+OAuth & Graph | Demonstrate OAuth to Graph connection to get information from Outlook contacts | [View Sample](/Node/BirthdayCountdown)
 
 
 # Support
@@ -44,7 +46,6 @@ These resources provide additional information and support for developing Cortan
 |**Community support** | [StackOverflow](https://stackoverflow.com/questions/tagged/cortana-skills-kit)
 |**Using a Cortana Skill** | Contact the skill developer through their publisher e-mail                 
 |**Bot Builder SDK issues/suggestions**| Use the issues tab on the <a href="https://github.com/Microsoft/BotBuilder/" target="_blank">GitHub repo</a>
-|**Reporting abuse**| Contact us at [csk-reports@microsoft.com](mailto://csk-reports@microsoft.com)
 
 # Contributing
 
