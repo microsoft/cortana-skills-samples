@@ -45,7 +45,7 @@ enter into the Cortana “Connected Services” client secret field
 1. _Optionally_ Add any additional enterprise owners you want to have grant permission
 1. Add ``User.Read``, ``offline_access`` and any other permissions to the resources you want available (space delimited)
  (see https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-permissions-and-consent#openid-connect-scopes
- for details on global and OpenID scopes)
+ for details on global and OpenID scopes) _Note_: `offline_access` is required for a refresh token to be sent
 1. Save the configuration
 
 You may notice that you appear to have two registrations for your skill. The first one was likely created when you
@@ -175,3 +175,7 @@ During development and redeployments the secret key can become invalid.  Through
 ---
 *Q: Why do I get a 500 error (internal server error) or a “Cannot connect to the service” error via Cortana after initial login prompt?*
 If you do not select “use tenant auth” in the Connected Services, Cortana will try and reuse your MSA credentials. If you have turned this on and still get the error, then a work around is to log in to Cortana from a device that is not on the same domain as your enterprise account.  (For example, if I write and deploy my skills on contoso.com using a MSA, I should try use my phone and telco provider’s internet connection to test my skill and log into my contoso.com domain account on my phone.)
+
+---
+*Q: Why do I get prompted to log in again every hour?*
+If you do not use the `offline_access` scope, the auth provider will not send a refresh token.
