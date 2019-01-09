@@ -1,0 +1,31 @@
+diff --git a/samples/csharp_dotnetcore/11.qnamaker/QnAMaker/QnABot.cs b/samples/csharp_dotnetcore/11.qnamaker/QnAMaker/QnABot.cs
+index 95fa8237..58fe628a 100644
+--- a/samples/csharp_dotnetcore/11.qnamaker/QnAMaker/QnABot.cs
++++ b/samples/csharp_dotnetcore/11.qnamaker/QnAMaker/QnABot.cs
+@@ -22,7 +22,7 @@ public class QnABot : IBot
+         /// Key in the bot config (.bot file) for the QnA Maker instance.
+         /// In the ".bot" file, multiple instances of QnA Maker can be configured.
+         /// </summary>
+-        public static readonly string QnAMakerKey = "QnABot";
++        public static readonly string QnAMakerKey = "qnamaker";
+ 
+         private const string WelcomeText = @"This bot will introduce you to QnA Maker.
+                                             Ask a question to get started.";
+@@ -69,14 +69,15 @@ public async Task OnTurnAsync(ITurnContext turnContext, CancellationToken cancel
+                 var response = await _services.QnAServices[QnAMakerKey].GetAnswersAsync(turnContext);
+                 if (response != null && response.Length > 0)
+                 {
+-                    await turnContext.SendActivityAsync(response[0].Answer, cancellationToken: cancellationToken);
++                    var msg = response[0].Answer;
++                    await turnContext.SendActivityAsync(msg, speak: msg, inputHint: InputHints.AcceptingInput, cancellationToken: cancellationToken);
+                 }
+                 else
+                 {
+                     var msg = @"No QnA Maker answers were found. This example uses a QnA Maker Knowledge Base that focuses on smart light bulbs. 
+                         To see QnA Maker in action, ask the bot questions like 'Why won't it turn on?' or 'I need help'.";
+ 
+-                    await turnContext.SendActivityAsync(msg, cancellationToken: cancellationToken);
++                    await turnContext.SendActivityAsync(msg, speak: msg, inputHint: InputHints.ExpectingInput, cancellationToken: cancellationToken);
+                 }
+             }
+             else if (turnContext.Activity.Type == ActivityTypes.ConversationUpdate)

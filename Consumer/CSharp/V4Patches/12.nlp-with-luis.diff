@@ -1,0 +1,28 @@
+diff --git a/samples/csharp_dotnetcore/12.nlp-with-luis/LuisBot.cs b/samples/csharp_dotnetcore/12.nlp-with-luis/LuisBot.cs
+index 27d6d3af..7e177c80 100644
+--- a/samples/csharp_dotnetcore/12.nlp-with-luis/LuisBot.cs
++++ b/samples/csharp_dotnetcore/12.nlp-with-luis/LuisBot.cs
+@@ -65,7 +65,11 @@ public async Task OnTurnAsync(ITurnContext turnContext, CancellationToken cancellationToken
+                 var topIntent = recognizerResult?.GetTopScoringIntent();
+                 if (topIntent != null && topIntent.HasValue && topIntent.Value.intent != "None")
+                 {
+-                    await turnContext.SendActivityAsync($"==>LUIS Top Scoring Intent: {topIntent.Value.intent}, Score: {topIntent.Value.score}\n");
++                    var displayText = $"==>LUIS Top Scoring Intent: {topIntent.Value.intent}, Score: {topIntent.Value.score}\n";
++                    var speakText = $"<speak xmlns=\"http://www.w3.org/2001/10/synthesis\" version=\"1.0\" xml:lang=\"en-US\">" +
++                        "The top scoring intent was '{topIntent.Value.intent}'" +
++                        " with a scopre of <say-as interpret-as=\"cardinal\">{topIntent.Value.score}</say-as>.</speak>";
++                    await turnContext.SendActivityAsync( displayText, speak: speakText, inputHint: InputHints.ExpectingInput, cancellationToken: cancellationToken);
+                 }
+                 else
+                 {
+@@ -73,8 +77,8 @@ public async Task OnTurnAsync(ITurnContext turnContext, CancellationToken cancel
+                             This sample is about identifying two user intents:
+                             'Calendar.Add'
+                             'Calendar.Find'
+-                            Try typing 'Add Event' or 'Show me tomorrow'.";
+-                    await turnContext.SendActivityAsync(msg);
++                            Try typing or saying 'Add Event' or 'Show me tomorrow'.";
++                    await turnContext.SendActivityAsync(msg, speak: msg, inputHint: InputHints.ExpectingInput, cancellationToken: cancellationToken);
+                 }
+             }
+             else if (turnContext.Activity.Type == ActivityTypes.ConversationUpdate)

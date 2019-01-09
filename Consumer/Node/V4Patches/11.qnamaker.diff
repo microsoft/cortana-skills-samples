@@ -1,0 +1,65 @@
+diff --git a/samples/javascript_nodejs/11.qnamaker/bot.js b/samples/javascript_nodejs/11.qnamaker/bot.js
+index 7584bae1..c6700c91 100644
+--- a/samples/javascript_nodejs/11.qnamaker/bot.js
++++ b/samples/javascript_nodejs/11.qnamaker/bot.js
+@@ -18,6 +18,15 @@ class QnAMakerBot {
+         this.qnaMaker = new QnAMaker(endpoint, qnaOptions);
+     }
+ 
++    /**
++     * Send a welcome message.
++     * @param {TurnContext} turnContext A TurnContext instance, containing all the data needed for processing the conversation turn.
++     */
++    async sendWelcome(turnContext) {
++        let msg = 'Welcome to the QnA Maker sample! Ask me a question and I will try to answer it.';
++        await turnContext.sendActivity( { text: msg, speak: msg, inputHint: 'expectingInput' } );
++    }
++
+     /**
+      * Every conversation turn for our QnAMakerBot will call this method.
+      * There are no dialogs used, since it's "single turn" processing, meaning a single request and
+@@ -25,25 +34,37 @@ class QnAMakerBot {
+      * @param {TurnContext} turnContext A TurnContext instance, containing all the data needed for processing the conversation turn.
+      */
+     async onTurn(turnContext) {
++
+         // By checking the incoming Activity type, the bot only calls QnA Maker in appropriate cases.
+         if (turnContext.activity.type === ActivityTypes.Message) {
++            // get any intents
++            let intent = turnContext.activity.entities.find((e) => {
++              return e.type === 'Intent';
++              });
++            // if there is message with no text and there is a launch intent, send welcome and wait for input
++            if( !turnContext.activity.text && intent && intent.name === 'Microsoft.Launch' )
++            {
++                this.sendWelcome( turnContext );
++                return;
++            }
++
+             // Perform a call to the QnA Maker service to retrieve matching Question and Answer pairs.
+             const qnaResults = await this.qnaMaker.getAnswers(turnContext);
+ 
+             // If an answer was received from QnA Maker, send the answer back to the user.
+             if (qnaResults[0]) {
+-                await turnContext.sendActivity(qnaResults[0].answer);
++                let msg = qnaResults[0].answer;
++                await turnContext.sendActivity( { text: msg, speak: msg } );
+ 
+             // If no answers were returned from QnA Maker, reply with help.
+             } else {
+-                await turnContext.sendActivity('No QnA Maker answers were found. This example uses a QnA Maker Knowledge Base that focuses on smart light bulbs. To see QnA Maker in action, ask the bot questions like "Why won\'t it turn on?" or "I need help."');
++                let msg = 'No QnA Maker answers were found. This example uses a QnA Maker Knowledge Base that focuses on smart light bulbs. To see QnA Maker in action, ask the bot questions like "Why won\'t it turn on?" or "I need help."';
++                await turnContext.sendActivity( { text: msg, speak: msg, inputHint: 'expectingInput' } );
+             }
+-
+         // If the Activity is a ConversationUpdate, send a greeting message to the user.
+-        } else if (turnContext.activity.type === ActivityTypes.ConversationUpdate &&
+-                   turnContext.activity.recipient.id !== turnContext.activity.membersAdded[0].id) {
+-            await turnContext.sendActivity('Welcome to the QnA Maker sample! Ask me a question and I will try to answer it.');
+-
++        } else if ( turnContext.activity.type === ActivityTypes.ConversationUpdate &&
++                   turnContext.activity.recipient.id !== turnContext.activity.membersAdded[0].id ) {
++            this.sendWelcome( turnContext );
+         // Respond to all other Activity types.
+         } else if (turnContext.activity.type !== ActivityTypes.ConversationUpdate) {
+             await turnContext.sendActivity(`[${ turnContext.activity.type }]-type activity detected.`);

@@ -1,0 +1,116 @@
+diff --git a/samples/csharp_dotnetcore/04.simple-prompt/SimplePromptBot.cs b/samples/csharp_dotnetcore/04.simple-prompt/SimplePromptBot.cs
+index c3d0e314..329afebc 100644
+--- a/samples/csharp_dotnetcore/04.simple-prompt/SimplePromptBot.cs
++++ b/samples/csharp_dotnetcore/04.simple-prompt/SimplePromptBot.cs
+@@ -25,6 +25,10 @@ namespace Microsoft.BotBuilderSamples
+     public class SimplePromptBot : IBot
+     {
+         private const string WelcomeText = "Welcome to Simple Prompt Bot. This bot will introduce you to prompts. Type anything to get started.";
++        private const string WelcomeSpeak = "Welcome to Simple Prompt Bot. This bot will introduce you to prompts. Type or click the microphone and say anything to get started.";
++        private const string AskNameText = "Please enter your name.";
++        private const string AskNameSpeak = "Please say your name.";
++        private const string ConfirmNameText = "Thank you, I have your name as";
+ 
+         private readonly SimplePromptBotAccessors _accessors;
+ 
+@@ -44,6 +48,20 @@ public SimplePromptBot(SimplePromptBotAccessors accessors)
+             _dialogs.Add(new TextPrompt("name"));
+         }
+ 
++        private bool IsLaunchIntent(IActivity activity)
++        {
++            var intent = activity.Entities?.FirstOrDefault(entity => entity.Type.Equals("Intent", StringComparison.Ordinal));
++            var intentName = string.Empty;
++            if (intent != null)
++            {
++                intentName = intent.Properties["name"]?.ToString();
++            }
++
++            return intent != null
++                    && !string.IsNullOrEmpty(intentName)
++                    && intentName == "Microsoft.Launch";
++        }
++
+         /// <summary>
+         /// This controls what happens when an <see cref="Activity"/> gets sent to the bot.
+         /// </summary>
+@@ -58,11 +76,18 @@ public async Task OnTurnAsync(ITurnContext turnContext, CancellationToken cancel
+                 throw new ArgumentNullException(nameof(turnContext));
+             }
+ 
++            if (IsLaunchIntent(turnContext.Activity))
++            {
++                await SendWelcomeMessageAsync(turnContext, cancellationToken);
++               // return;
++            }
++
+             // Handle Message activity type, which is the main activity type for shown within a conversational interface
+             // Message activities may contain text, speech, interactive cards, and binary or unknown attachments.
+             // see https://aka.ms/about-bot-activity-message to learn more about the message and other activity types
+             if (turnContext.Activity.Type == ActivityTypes.Message)
+             {
++
+                 // Run the DialogSet - let the framework identify the current state of the dialog from
+                 // the dialog stack and figure out what (if any) is the active dialog.
+                 var dialogContext = await _dialogs.CreateContextAsync(turnContext, cancellationToken);
+@@ -71,10 +96,11 @@ public async Task OnTurnAsync(ITurnContext turnContext, CancellationToken cancel
+                 // If the DialogTurnStatus is Empty we should start a new dialog.
+                 if (results.Status == DialogTurnStatus.Empty)
+                 {
++                    var message = MessageFactory.Text(AskNameText, AskNameSpeak, InputHints.ExpectingInput);
+                     // A prompt dialog can be started directly on the DialogContext. The prompt text is given in the PromptOptions.
+                     await dialogContext.PromptAsync(
+                         "name",
+-                        new PromptOptions { Prompt = MessageFactory.Text("Please enter your name.") },
++                        new PromptOptions { Prompt = message },
+                         cancellationToken);
+                 }
+ 
+@@ -84,8 +110,10 @@ public async Task OnTurnAsync(ITurnContext turnContext, CancellationToken cancel
+                     // Check for a result.
+                     if (results.Result != null)
+                     {
++                        string confirmName = $"{ConfirmNameText} '{results.Result}'.";
++                        var message = MessageFactory.Text(confirmName, confirmName, InputHints.AcceptingInput);
+                         // Finish by sending a message to the user. Next time ContinueAsync is called it will return DialogTurnStatus.Empty.
+-                        await turnContext.SendActivityAsync(MessageFactory.Text($"Thank you, I have your name as '{results.Result}'."));
++                        await turnContext.SendActivityAsync(message);
+                     }
+                 }
+             }
+@@ -107,23 +135,30 @@ public async Task OnTurnAsync(ITurnContext turnContext, CancellationToken cancel
+             await _accessors.ConversationState.SaveChangesAsync(turnContext, false, cancellationToken);
+         }
+ 
++        private static async Task SendWelcomeMessageAsync( ITurnContext turnContext, CancellationToken cancellationToken )
++        {
++            var reply = turnContext.Activity.CreateReply();
++            reply.Text = WelcomeText;
++            reply.Speak = WelcomeSpeak;
++            reply.InputHint = InputHints.AcceptingInput;
++            await turnContext.SendActivityAsync(reply, cancellationToken);
++        }
++
+         /// <summary>
+-        /// Sends a welcome message to the user.
++        /// Sends a welcome message to recently joined users.
+         /// </summary>
+         /// <param name="turnContext">A <see cref="ITurnContext"/> containing all the data needed
+         /// for processing this conversation turn. </param>
+         /// <param name="cancellationToken">(Optional) A <see cref="CancellationToken"/> that can be used by other objects
+         /// or threads to receive notice of cancellation.</param>
+         /// <returns>A <see cref="Task"/> that represents the work queued to execute.</returns>
+-        private static async Task SendWelcomeMessageAsync(ITurnContext turnContext, CancellationToken cancellationToken)
++        private static async Task SendWelcomeMessagesAsync(ITurnContext turnContext, CancellationToken cancellationToken)
+         {
+             foreach (var member in turnContext.Activity.MembersAdded)
+             {
+                 if (member.Id != turnContext.Activity.Recipient.Id)
+                 {
+-                    var reply = turnContext.Activity.CreateReply();
+-                    reply.Text = WelcomeText;
+-                    await turnContext.SendActivityAsync(reply, cancellationToken);
++                    await SendWelcomeMessageAsync(turnContext, cancellationToken);
+                 }
+             }
+         }

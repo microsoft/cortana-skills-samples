@@ -1,0 +1,30 @@
+diff --git a/samples/javascript_nodejs/12.nlp-with-luis/bot.js b/samples/javascript_nodejs/12.nlp-with-luis/bot.js
+index 9c601a96..88d30050 100644
+--- a/samples/javascript_nodejs/12.nlp-with-luis/bot.js
++++ b/samples/javascript_nodejs/12.nlp-with-luis/bot.js
+@@ -34,14 +34,19 @@ class LuisBot {
+             const topIntent = results.luisResult.topScoringIntent;
+ 
+             if (topIntent.intent !== 'None') {
+-                await turnContext.sendActivity(`LUIS Top Scoring Intent: ${ topIntent.intent }, Score: ${ topIntent.score }`);
++                let msgText = `LUIS Top Scoring Intent: ${ topIntent.intent }, Score: ${ topIntent.score }`;
++                let msgSpeak = '<speak xmlns=\"http://www.w3.org/2001/10/synthesis\" version=\"1.0\" xml:lang=\"en-US\">' +
++                                        `The top scoring intent was \'${topIntent.intent}\'` +
++                                        ` with a scopre of <say-as interpret-as=\"cardinal\">${topIntent.score}</say-as>.</speak>`;
++                    await turnContext.sendActivity( { text: msgText, speak: msgSpeak, inputHint: 'expectingInput' } );
+             } else {
+                 // If the top scoring intent was "None" tell the user no valid intents were found and provide help.
+-                await turnContext.sendActivity(`No LUIS intents were found.
+-                                                \nThis sample is about identifying two user intents:
+-                                                \n - 'Calendar.Add'
+-                                                \n - 'Calendar.Find'
+-                                                \nTry typing 'Add Event' or 'Show me tomorrow'.`);
++                await turnContext.sendActivity(  {
++                    text: 'No LUIS intents were found.\nThis sample is about identifying two user intents:\n - Calendar.Add\n - Calendar.Find\nTry typing \'Add Event\' or \'Show me tomorrow\'.',
++                    speak: 'No intents were found. This sample is about identifying \'Calendar Add\' and \'Calendar Find\'. Try saying \'Add Event\' or \'Show me tomorrow\'',
++                    inputHint: 'expectingInput'
++                    }
++                );
+             }
+         } else if (turnContext.activity.type === ActivityTypes.ConversationUpdate &&
+             turnContext.activity.recipient.id !== turnContext.activity.membersAdded[0].id) {

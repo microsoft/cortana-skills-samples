@@ -1,0 +1,13 @@
+diff --git a/samples/csharp_dotnetcore/02.a.echo-bot/MyBot.cs b/samples/csharp_dotnetcore/02.a.echo-bot/MyBot.cs
+index 37cb49fb..17edf7b7 100644
+--- a/samples/csharp_dotnetcore/02.a.echo-bot/MyBot.cs
++++ b/samples/csharp_dotnetcore/02.a.echo-bot/MyBot.cs
+@@ -46,7 +46,7 @@ public async Task OnTurnAsync(ITurnContext turnContext, CancellationToken cancel
+             {
+                 // Echo back to the user whatever they typed.
+                 var responseMessage = $"You said '{turnContext.Activity.Text}'\n";
+-                await turnContext.SendActivityAsync(responseMessage);
++                await turnContext.SendActivityAsync(responseMessage, speak: responseMessage, inputHint: "expectingInput" );
+             }
+             else
+             {

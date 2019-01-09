@@ -1,0 +1,17 @@
+diff --git a/samples/javascript_nodejs/07.using-adaptive-cards/bot.js b/samples/javascript_nodejs/07.using-adaptive-cards/bot.js
+index c0fbfb6d..91e8dec1 100644
+--- a/samples/javascript_nodejs/07.using-adaptive-cards/bot.js
++++ b/samples/javascript_nodejs/07.using-adaptive-cards/bot.js
+@@ -33,9 +33,11 @@ class AdaptiveCardsBot {
+         // See https://aka.ms/about-bot-activity-message to learn more about the message and other activity types.
+         if (context.activity.type === 'message') {
+             const randomlySelectedCard = CARDS[Math.floor((Math.random() * CARDS.length - 1) + 1)];
++            var card = CardFactory.adaptiveCard(randomlySelectedCard);
+             await context.sendActivity({
+                 text: 'Here is an Adaptive Card:',
+-                attachments: [CardFactory.adaptiveCard(randomlySelectedCard)]
++                speak: card.content.speak || 'Sorry, this card does not contain speech.',
++                attachments: [ card ]
+             });
+         } else {
+             await context.sendActivity(`[${ context.activity.type } event detected]`);

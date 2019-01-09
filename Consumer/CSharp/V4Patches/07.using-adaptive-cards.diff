@@ -1,0 +1,48 @@
+diff --git a/samples/csharp_dotnetcore/07.using-adaptive-cards/AdaptiveCardsBot.cs b/samples/csharp_dotnetcore/07.using-adaptive-cards/AdaptiveCardsBot.cs
+index c64f6527..2f01ab3b 100644
+--- a/samples/csharp_dotnetcore/07.using-adaptive-cards/AdaptiveCardsBot.cs
++++ b/samples/csharp_dotnetcore/07.using-adaptive-cards/AdaptiveCardsBot.cs
+@@ -11,6 +11,8 @@
+ using Microsoft.Bot.Builder;
+ using Microsoft.Bot.Schema;
+ using Newtonsoft.Json;
++using Newtonsoft.Json.Linq;
++
+ using Remotion.Linq.Parsing.Structure.IntermediateModel;
+ 
+ namespace Microsoft.BotBuilderSamples
+@@ -64,14 +66,25 @@ public async Task OnTurnAsync(ITurnContext turnContext, CancellationToken cancel
+                 Random r = new Random();
+                 var cardAttachment = CreateAdaptiveCardAttachment(this._cards[r.Next(this._cards.Length)]);
+                 var reply = turnContext.Activity.CreateReply();
++                string speak = (string)((JObject)cardAttachment.Content).SelectToken("speak");
++                if ( string.IsNullOrEmpty(speak) )
++                {
++                    speak = "Sorry, this card does not contain speech.";
++                }
++                reply.Text = "Please enter any text to see another card.";
++                reply.Speak = speak + " Click the microphone and say anything to see another card.";
++                reply.InputHint = InputHints.AcceptingInput;
+                 reply.Attachments = new List<Attachment>() { cardAttachment };
++
+                 await turnContext.SendActivityAsync(reply, cancellationToken);
+-                await turnContext.SendActivityAsync("Please enter any text to see another card.", cancellationToken: cancellationToken);
++                // the statement below will clear Cortana's canvas, so we add the help to the card
++                // await turnContext.SendActivityAsync("Please enter any text to see another card.", cancellationToken: cancellationToken);
+             }
+             else if (turnContext.Activity.Type == ActivityTypes.ConversationUpdate)
+             {
+                 if (turnContext.Activity.MembersAdded != null)
+                 {
++                    // note that Cortana receives a launch intent; see the simple-prompt patch re how to support launch help
+                     await SendWelcomeMessageAsync(turnContext, cancellationToken);
+                 }
+             }
+@@ -98,6 +111,7 @@ private static async Task SendWelcomeMessageAsync(ITurnContext turnContext, Canc
+             {
+                 if (member.Id != turnContext.Activity.Recipient.Id)
+                 {
++                    // note this will not speak the welcome in the Cortana channel; it will welcome users in a chat channel
+                     await turnContext.SendActivityAsync(
+                         $"Welcome to AdaptiveCardsBot {member.Name}. {WelcomeText}",
+                         cancellationToken: cancellationToken);
