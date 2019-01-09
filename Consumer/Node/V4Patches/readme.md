@@ -7,7 +7,7 @@ These patches are _point in time_ and serve to demonstrate changes required to t
 
 Pre-work
 1. clone the BotBulder-Samples and connect to the Sample directory; follow the instructions in [BotBuilder-Samples](https://github.com/Microsoft/BotBuilder-Samples) to build and run the bot locally
-1. test the bot with botemaulator (available [here](https://github.com/Microsoft/BotFramework-Emulator/wiki/Getting-Started))
+1. test the bot with bot emulator (available [here](https://github.com/Microsoft/BotFramework-Emulator/wiki/Getting-Started))
 1. run ngrok via `ngrok.exe http 3978 -host-header="localhost:3978"` (get ngrok [here](https://ngrok.com/download))
 1. create a bot channel registration on Azure portal ([here](https://portal.azure.com)) using your `https` ngrok endpoint;
 1. create a new app key and copy the app id and key (password) into the .bot file
