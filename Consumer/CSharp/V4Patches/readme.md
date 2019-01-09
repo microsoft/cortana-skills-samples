@@ -6,18 +6,18 @@ This directory contains patches that show how to enable Cortana for Bot Service 
 These patches are _point in time_ and serve to demonstrate changes required to turn a Bot Service bot into a Cortana skill.
 
 Pre-work
-1. clone the BotBulder-Samples and connect to the Sample directory; follow the instructions in the above link to build and run the bot locally
-1. test the bot with botemaulator (available here)
-1. run ngrok via `ngrok.exe http 3978 -host-header="localhost:3978"` (get ngrok here)
-1. create a bot channel registration on Azure portal (here) using your `https` ngrok endpoint;
+1. clone the BotBulder-Samples and connect to the Sample directory; follow the instructions in [BotBuilder-Samples](https://github.com/Microsoft/BotBuilder-Samples) to build and run the bot locally
+1. test the bot with botemaulator (available [here](https://github.com/Microsoft/BotFramework-Emulator/wiki/Getting-Started))
+1. run ngrok via `ngrok.exe http 3978 -host-header="localhost:3978"` (get ngrok [here](https://ngrok.com/download))
+1. create a bot channel registration on Azure portal ([here](https://portal.azure.com)) using your `https` ngrok endpoint;
 1. create a new app key and copy the app id and key (password) into the .bot file
 1. add the Cortana channel with appropriate invocation
-1. ask cortana to invoke your bot to check that she can talk to your local endpoint
+1. ask Cortana to invoke your bot to check that she can talk to your local endpoint
 
 To apply the `diff`,
 1. download the `.diff` file  (or cut and paste) into the target sample directory
 1. type `git apply thediff.diff` (where thediff is whatever the filename was in the previous step)
-1. restart your service (like via `npm start`)
+1. start your service (via `dotnet run` from CLI)
 
 ## The Patches ##
 | Name | Description |
