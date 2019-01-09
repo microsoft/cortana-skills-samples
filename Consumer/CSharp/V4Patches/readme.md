@@ -16,7 +16,7 @@ Pre-work
 
 To apply the `diff`,
 1. download the `.diff` file  (or cut and paste) into the target sample directory
-1. type `git apply thediff.diff` (where thediff is whatever the filename was in the previous step)
+1. type `git apply thediff.diff` (where _thediff_ is whatever the filename was in the previous step)
 1. start your service (via `dotnet run` from CLI)
 
 ## The Patches ##
