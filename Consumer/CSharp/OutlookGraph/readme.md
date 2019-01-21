@@ -12,7 +12,7 @@ This demo builds upon the [OAuthExample](../OAuth2Example) and shows
 You must configure the Cortana channel (via the **Manager user identity through Connected Services** under **Default Settings**)
 and Graph (through the **[Application Registration Portal](https://apps.dev.microsoft.com)**, **Web Platform**, and **Microsoft Graph Permissions**.)
 
-See `index.htm` for details on setting up birthdays on your outlook contacts.
+See `default.htm` for details on setting up birthdays on your outlook contacts.
 
 ## Calling Microsoft Graph ##
 
