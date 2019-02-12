@@ -64,9 +64,8 @@ are building enterprise skills with an AAD account and familiar with Azure tools
 ![settings](images/clip_image001.png)
 And note your Application ID (as your Client Id).
 1. Click the properties blade and fill in any empty fields for publishing.  (For example, TOS and Privacy statements are required to publish.)
-1. Click on the Reply URLs blade and enter the Cortana and (optional) botframework URLs to register that these URLs are okay to call from the client 
-![Reply URLs](images/clip_image002.png)
-1. Click the Owners blade and add your domain account and any additional owners
+1. Click on the Reply URLs blade and enter the Cortana reply URL `https://wwww.bing.com/agents/oauth` _Note: you cannot have multiple reply urls on different domains._
+1. Click the Owners blade and add your domain account and any additional owners you with to make changes to the registration
 1. Click on the Required permissions blade and grant any common permissions for selected services. Note,
  many enterprise resources will require an administrator to grant permissions so coordinate with your AAD 
  administrator.  As an example, you can add “Windows Azure Active Directory” as the service and delegate 
