@@ -11,10 +11,8 @@ To apply the `diff`,
 1. upload the `.diff` file  (or cut and paste) into the target directory (same directory as file being patched)
 1. enter the cloud console and connect to the directory (containing the file being patched)
 1. type `git apply --ignore-whitespace thediff.diff` (where _thediff_ is whatever the filename was in the previous step)
-1. connect to the outer directory
-1. type `build`
 
 ## The Patches ##
 | Name | Description |
 | --- | --- |
-| QnAMaker Template | Shows how to add speak to `Dialogs/BasicQnAMakerDialog.cs`. |
+| QnAMaker Template | Shows how to add speak to `app.js`. |
