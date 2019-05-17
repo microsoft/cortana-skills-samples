@@ -1,7 +1,7 @@
 diff --git a/app.js b/app_new.js
 index a41c192..732a8fd 100644
 --- a/app.js
-+++ b/app_new.js
++++ b/app.js
 @@ -66,6 +66,13 @@ var basicQnAMakerDialog = new builder_cognitiveservices.QnAMakerDialog({
  }
  );
