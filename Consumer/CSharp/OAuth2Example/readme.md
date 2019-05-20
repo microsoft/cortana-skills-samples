@@ -164,7 +164,7 @@ private Activity CreateOAuthCard( Activity activity )
     }
 ```
 
-_You do not need to send an OAuth card if your turn on *Sing in at invocation*_.
+_You do not need to send an OAuth card if your turn on *Sign in at invocation*_.
 
 ## Questions and Answers ##
 *Q: What is the difference between Azure Active Directory v1 and v2?*
