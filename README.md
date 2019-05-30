@@ -31,16 +31,20 @@ _Note: Enterprise skills tools and support are only offered to partners in Micro
 Task | Description | Action 
 ------------ | ------------- | :-----------:
 Getting Started | A basic Hello World skill. | [View Sample](/Consumer/CSharp/HelloWorldSkill)
+AdaptiveCards Skill | A demo skill showing the Calendar notification card with speech support. |  [View Sample](/Consumer/CSharp/AdaptiveCardSkill)
 OAuth V2 | Demonstrate configuration of OAuth to get an Authorization token  | [View Sample](/Consumer/CSharp/OAuth2Example)
 OAuth & Graph | Demonstrate OAuth to Graph connection to get information from Outlook contacts  | [View Sample](/Consumer/CSharp/OutlookGraph)
+V3Patches | Diff files for key Azure portal templates to speak with Cortana | [View Sample](/Consumer/CSharp/V3Patches)
 V4Patches | Diff files for key [bot samples](https://github.com/Microsoft/BotBuilder-Samples) to speak with Cortana | [View Sample](/Consumer/CSharp/V4Patches)
 
 
 ### Node ###
 Task | Description | Action 
 ------------ | ------------- | :-----------:
+AdaptiveCards Skill | A demo skill showing the Calendar notification card with speech support. |  [View Sample](/Consumer/Node/AdaptiveCardSkill)
 OAuth V2 |  Demonstrate configuration of OAuth to get an Authorization token|  [View Sample](/Consumer/Node/OAuth2Example)
 OAuth & Graph | Demonstrate OAuth to Graph connection to get information from Outlook contactss | [View Sample](/Consumer/Node/OutlookGraph)
+V3Patches | Diff files for key Azure portal templates to speak with Cortana | [View Sample](/Consumer/Node/V3Patches)
 V4Patches | Diff files for key [bot samples](https://github.com/Microsoft/BotBuilder-Samples) to speak with Cortana | [View Sample](/Consumer/Node/V4Patches)
 
 
