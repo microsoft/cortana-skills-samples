@@ -1,0 +1,60 @@
+diff --git a/BasicQnAMakerDialog.cs b/BasicQnAMakerDialog_new.cs
+index ddef1bc..9010d69 100644
+--- a/BasicQnAMakerDialog.cs
++++ b/BasicQnAMakerDialog_new.cs
+@@ -1,6 +1,7 @@
+ using System;
+ using System.Threading;
+ using System.Threading.Tasks;
++using System.Collections.Generic;
+ 
+ using Microsoft.Bot.Builder.Azure;
+ using Microsoft.Bot.Builder.Dialogs;
+@@ -69,9 +70,22 @@ namespace Microsoft.Bot.Sample.QnABot
+         // Go to https://qnamaker.ai and feed data, train & publish your QnA Knowledgebase.
+         // Parameters to QnAMakerService are:
+         // Required: subscriptionKey, knowledgebaseId, 
+-        // Optional: defaultMessage, scoreThreshold[Range 0.0 – 1.0]
++        // Optional: defaultMessage, scoreThreshold[Range 0.0 - 1.0]
+         public BasicQnAMakerPreviewDialog() : base(new QnAMakerService(new QnAMakerAttribute(RootDialog.GetSetting("QnAAuthKey"), Utils.GetAppSetting("QnAKnowledgebaseId"), "No good match in FAQ.", 0.5)))
+         { }
++        
++         // Override to also include the knowledgebase question with the answer on confident matches
++        protected override async Task RespondFromQnAMakerResultAsync(IDialogContext context, IMessageActivity message, QnAMakerResults results)
++        {
++            if (results.Answers.Count > 0)
++            {
++                IMessageActivity response = context.MakeMessage();
++                response.Text = "Here is the match from FAQ:  \r\n  Q: " + results.Answers[0].Questions[0] + "  \r\n A: " + results.Answers[0].Answer;
++                response.Speak = response.Text;
++                response.InputHint = "acceptingInput";
++                await context.PostAsync(response);
++            }
++        }
+     }
+ 
+     // Dialog for QnAMaker GA service
+@@ -81,9 +95,21 @@ namespace Microsoft.Bot.Sample.QnABot
+         // Go to https://qnamaker.ai and feed data, train & publish your QnA Knowledgebase.
+         // Parameters to QnAMakerService are:
+         // Required: qnaAuthKey, knowledgebaseId, endpointHostName
+-        // Optional: defaultMessage, scoreThreshold[Range 0.0 – 1.0]
++        // Optional: defaultMessage, scoreThreshold[Range 0.0 - 1.0]
+         public BasicQnAMakerDialog() : base(new QnAMakerService(new QnAMakerAttribute(RootDialog.GetSetting("QnAAuthKey"), Utils.GetAppSetting("QnAKnowledgebaseId"), "No good match in FAQ.", 0.5, 1, Utils.GetAppSetting("QnAEndpointHostName"))))
+         { }
+ 
++         // Override to also include the knowledgebase question with the answer on confident matches
++        protected override async Task RespondFromQnAMakerResultAsync(IDialogContext context, IMessageActivity message, QnAMakerResults results)
++        {
++            if (results.Answers.Count > 0)
++            {
++                IMessageActivity response = context.MakeMessage();
++                response.Text = "Here is the match from FAQ:  \r\n  Q: " + results.Answers[0].Questions[0] + "  \r\n A: " + results.Answers[0].Answer;
++                response.Speak = response.Text;
++                response.InputHint = "acceptingInput";
++                await context.PostAsync(response);
++            }
++        }
+     }
+ }
+\ No newline at end of file

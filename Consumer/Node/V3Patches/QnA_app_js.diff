@@ -1,0 +1,18 @@
+diff --git a/app.js b/app_new.js
+index a41c192..732a8fd 100644
+--- a/app.js
++++ b/app_new.js
+@@ -66,6 +66,13 @@ var basicQnAMakerDialog = new builder_cognitiveservices.QnAMakerDialog({
+ }
+ );
+ 
++basicQnAMakerDialog.respondFromQnAMakerResult = function (session, qnaMakerResult) {
++    var text = qnaMakerResult.answers[0].answer;
++    // do any transformations on the Text to SSML here
++    var speak = text;
++    session.say( text, speak );
++    };
++
+ bot.dialog('basicQnAMakerDialog', basicQnAMakerDialog);
+ 
+ bot.dialog('/', //basicQnAMakerDialog);

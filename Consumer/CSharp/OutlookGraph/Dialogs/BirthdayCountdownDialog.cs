@@ -1,7 +1,7 @@
 // Copyright(c) Microsoft Corporation.All rights reserved.
-// Licensed under the MIT License.using System;
+// Licensed under the MIT License.
 
-using System.Text;
+using System;
 using System.Threading.Tasks;
 using System.Diagnostics;
 
@@ -9,7 +9,6 @@ using Microsoft.Bot.Connector;
 using Microsoft.Bot.Builder.Dialogs;
 using System.Net.Http;
 using System.Collections.Generic;
-using System.Web.Script.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 

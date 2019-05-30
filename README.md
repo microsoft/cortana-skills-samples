@@ -33,7 +33,7 @@ Task | Description | Action
 Getting Started | A basic Hello World skill. | [View Sample](/Consumer/CSharp/HelloWorldSkill)
 OAuth V2 | Demonstrate configuration of OAuth to get an Authorization token  | [View Sample](/Consumer/CSharp/OAuth2Example)
 OAuth & Graph | Demonstrate OAuth to Graph connection to get information from Outlook contacts  | [View Sample](/Consumer/CSharp/OutlookGraph)
-
+V4Patches | Diff files for key [bot samples](https://github.com/Microsoft/BotBuilder-Samples) to speak with Cortana | [View Sample](/Consumer/CSharp/V4Patches)
 
 
 ### Node ###
@@ -41,9 +41,11 @@ Task | Description | Action
 ------------ | ------------- | :-----------:
 OAuth V2 |  Demonstrate configuration of OAuth to get an Authorization token|  [View Sample](/Consumer/Node/OAuth2Example)
 OAuth & Graph | Demonstrate OAuth to Graph connection to get information from Outlook contactss | [View Sample](/Consumer/Node/OutlookGraph)
+V4Patches | Diff files for key [bot samples](https://github.com/Microsoft/BotBuilder-Samples) to speak with Cortana | [View Sample](/Consumer/Node/V4Patches)
+
 
 ## Enterprise ##
-_This section is coming soon._
+_This section is coming soon. Cortana Skills Kit for Enterprise is in the Technology Adoption program. Visit [this link](https://docs.microsoft.com/cortana/enterprise/overview) for more details._
 
 # Support #
 

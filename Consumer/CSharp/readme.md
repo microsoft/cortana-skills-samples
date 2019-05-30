@@ -1,5 +1,4 @@
 
 # C# #
 
-This repository contains C# botframework V3 examples for
-                                                     Cortana consumer skills kit.
+This repository contains C# botframework V3 examples for Cortana consumer skills kit (unless otherwise noted).
