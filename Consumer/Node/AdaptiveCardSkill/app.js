@@ -41,8 +41,8 @@ var card = readCard();
 // Create bot with root dialog and 2 stage waterfall
 var bot = new builder.UniversalBot(connector, [
 
-    // Handle the spoken response OR click from the submit action.
-    // We support voice first; interaction with the card is optional.
+    // Put up the AdaptiveCard that was loaded on construction.
+    // (You can load the card each time from FS, or load from CosmosDB, to support CI/CD at the expense of load time.)
     function (session, args, next) {
         let message = session.message;
         if (session.conversationData.step == 2) { // Jump to second step
@@ -59,6 +59,7 @@ var bot = new builder.UniversalBot(connector, [
     },
 
     // Handle the spoken response OR click from the submit action.
+    // We support voice first; interaction with the card is optional.
     function (session, unused) {
         let message = session.message;
         var response = new builder.Message(session);

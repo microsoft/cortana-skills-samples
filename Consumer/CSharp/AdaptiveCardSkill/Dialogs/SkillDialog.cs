@@ -137,7 +137,8 @@ namespace AdaptiveCardSkill
         }
 
         /**
-         * Handle the spoken response OR click from the submit action.
+         * Put up the AdaptiveCard that was loaded on construction.
+         * (You can load the card each time from FS, or load from CosmosDB, to support CI/CD at the expense of load time.)
          */
 
         public async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> argument)
@@ -152,12 +153,13 @@ namespace AdaptiveCardSkill
             {
                 ContentType = AdaptiveCard.ContentType,
                 Content = card,
-                Name = "ReminderMe"
+                Name = "RemindMe"
             };
             response.Speak = "<speak version=\"1.0\" xmlns=\"http://www.w3.org/2001/10/synthesis\" xml:lang=\"en-US\">" +
                 card.speak +
                 "</speak>"; // by default, wrap speak as Cortana expects fully formed ssml, where other clients do not
             response.Attachments.Add(attachment);
+            response.Text = "There is a calendar reminder.";
 
             await context.PostAsync(response);
             context.Wait(ResponseHandleAsync); // hand off to response handler
