@@ -5,3 +5,4 @@ This example, based on Adaptive Card's Calendar Reminder, demonstrates
 - Read the speak text attached to the AdaptiveCard via Cortana
 - Handle spoken responses to the card without requiring the user interact with visual elements
 
+Start with `Dialogs\SkillDialog.cs`.

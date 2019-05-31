@@ -1,11 +1,10 @@
 {
-  "name": "hello-chatconnector",
+  "name": "AdaptiveCardSkill",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "azure-publish": "node publish.js"
+    "start": "app.js"
   },
   "author": "",
   "license": "ISC",
