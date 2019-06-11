@@ -1,0 +1,114 @@
+diff --git a/samples/csharp_dotnetcore/18.bot-authentication/AuthenticationBot.cs b/samples/csharp_dotnetcore/18.bot-authentication/AuthenticationBot.cs
+index 9d3b5803..582f8542 100644
+--- a/samples/csharp_dotnetcore/18.bot-authentication/AuthenticationBot.cs
++++ b/samples/csharp_dotnetcore/18.bot-authentication/AuthenticationBot.cs
+@@ -29,11 +29,12 @@ public class AuthenticationBot : IBot
+     {
+         // The connection name here must match the one from
+         // your Bot Channels Registration on the settings blade in Azure.
+-        private const string ConnectionName = "";
++        private const string ConnectionName = "AuthBotBernie";
+ 
+         private const string LoginPromptName = "loginPrompt";
+         private const string ConfirmPromptName = "confirmPrompt";
+ 
++        private const string LogoutText = "You have been logged out.";
+         private const string WelcomeText = @"This bot will introduce you to Authentication.
+                                         Type anything to get logged in. Type 'logout' to sign-out.
+                                         Type 'help' to view this message again";
+@@ -76,36 +77,64 @@ public async Task OnTurnAsync(ITurnContext turnContext, CancellationToken cancel
+                 throw new ArgumentNullException(nameof(turnContext));
+             }
+ 
++            Boolean isCortana = turnContext.Activity.ChannelId == "cortana";
++            Boolean isCortanaLaunch = false;
++            var firstIntent = turnContext.Activity.Entities?.FirstOrDefault(entity => entity.Type.Equals("Intent", StringComparison.Ordinal)); // look through the JSON for Intents
++            if( firstIntent != null ) isCortanaLaunch = (firstIntent.Properties["name"]?.ToString() == "Microsoft.Launch") ;
++
+             switch (turnContext.Activity.Type)
+             {
+                 case ActivityTypes.Message:
++                    // Get intent if any
+ 
+                     // This bot is not case sensitive.
+-                    var text = turnContext.Activity.Text.ToLowerInvariant();
+-                    if (text == "help")
++                    var text = turnContext.Activity.Text; // Cortana will send an Empty message with an invocation intent by default
++                    text = (String.IsNullOrEmpty(text)) ? string.Empty : text.ToLowerInvariant();
++                    if (isCortana && text == string.Empty && isCortanaLaunch)
+                     {
+-                        await turnContext.SendActivityAsync(WelcomeText, cancellationToken: cancellationToken);
+-                        break;
++                        var txt = $"Welcome to AuthenticationBot. {WelcomeText}";
++                        await turnContext.SendActivityAsync( txt, speak: txt, inputHint: "acceptingInput", cancellationToken: cancellationToken);
+                     }
+-
+-                    if (text == "logout")
++                    else
+                     {
+-                        // The bot adapter encapsulates the authentication processes.
+-                        var botAdapter = (BotFrameworkAdapter)turnContext.Adapter;
+-                        await botAdapter.SignOutUserAsync(turnContext, ConnectionName, cancellationToken: cancellationToken);
+-                        await turnContext.SendActivityAsync("You have been signed out.", cancellationToken: cancellationToken);
+-                        await turnContext.SendActivityAsync(WelcomeText, cancellationToken: cancellationToken);
+-                        break;
+-                    }
++                        if (text == "help")
++                        {
++                            await turnContext.SendActivityAsync(WelcomeText, speak: WelcomeText, inputHint: "acceptingInput", cancellationToken: cancellationToken);
++                            break;
++                        }
+ 
+-                    await dc.ContinueDialogAsync(cancellationToken);
++                        if (text == "logout" || text == "log out")
++                        {
++                            // The bot adapter encapsulates the authentication processes.
++                            var botAdapter = (BotFrameworkAdapter)turnContext.Adapter;
++                            await botAdapter.SignOutUserAsync(turnContext, ConnectionName, cancellationToken: cancellationToken);
++                            await turnContext.SendActivityAsync(LogoutText, speak: LogoutText, inputHint: "ignoringInput", cancellationToken: cancellationToken);
++                            await turnContext.SendActivityAsync(WelcomeText, speak: WelcomeText, inputHint: "acceptingInput", cancellationToken: cancellationToken);
++                            break;
++                        }
+ 
+-                    if (!turnContext.Responded)
+-                    {
+-                        // Start the Login process.
+-                        await dc.BeginDialogAsync("authDialog", cancellationToken: cancellationToken);
+-                    }
++                        if (text == "show")
++                        {
++                            var msg = "There is nothing to show.";
++                            var AuthEntity = turnContext.Activity.Entities?.FirstOrDefault(entity => entity.Type.Equals("AuthorizationToken", StringComparison.Ordinal));
++                            if (AuthEntity != null)
++                            {
++                                var token = AuthEntity.Properties["token"]?.ToString();
++                                if (String.IsNullOrEmpty(token)) msg = "Entity but no token. Possible refresh.";
++                                else msg = $"Here is your token {token}";
++                            }
++                            await turnContext.SendActivityAsync(msg, speak: "Here you go.", inputHint: "acceptingInput", cancellationToken: cancellationToken);
++                            break;
++                        }
+ 
++                        await dc.ContinueDialogAsync(cancellationToken);
++
++                        if (!turnContext.Responded)
++                        {
++                            // Start the Login process.
++                            await dc.BeginDialogAsync("authDialog", cancellationToken: cancellationToken);
++                        }
++                    }
+                     break;
+                 case ActivityTypes.Event:
+                 case ActivityTypes.Invoke:
+@@ -146,9 +175,8 @@ private static async Task SendWelcomeMessageAsync(ITurnContext turnContext, Canc
+             {
+                 if (member.Id != turnContext.Activity.Recipient.Id)
+                 {
+-                    await turnContext.SendActivityAsync(
+-                        $"Welcome to AuthenticationBot {member.Name}. {WelcomeText}",
+-                        cancellationToken: cancellationToken);
++                    var txt = $"Welcome to AuthenticationBot {member.Name}. {WelcomeText}";
++                    await turnContext.SendActivityAsync(txt, speak: txt, inputHint: "acceptingInput", cancellationToken: cancellationToken);                
+                 }
+             }
+         }

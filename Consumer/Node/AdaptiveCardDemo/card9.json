@@ -1,0 +1,31 @@
+{
+    "type": "AdaptiveCard",
+    "body": [             
+        {
+            "type": "Container",
+            "items": [
+                {
+                    "type": "TextBlock",
+                    "text": "**Bold**, _Italic_,\r- Item 1\r- Item 2\r1. Item A\r2. Item B\r ([HyperLink](http://www.microsoft.com))",
+                    "wrap": true
+                }, 
+{
+                                    "type": "TextBlock",
+                                    "spacing": "None",
+                                    "text": "Compact {{DATE(2017-02-14T06:08:39Z,COMPACT)}}\rShort {{DATE(2017-02-14T06:08:39Z,SHORT)}}\rLong {{DATE(2017-02-14T06:08:39Z,LONG)}}\rTime {{TIME(2017-02-14T06:08:39Z)}}\r",
+                                    "isSubtle": true,
+                                    "wrap": true
+                }
+            ]
+        }
+    ],
+    "actions": [
+        {
+            "type": "Action.OpenUrl",
+            "title": "Adaptive IO",
+            "url": "http://adaptivecards.io"
+        }
+    ],
+    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+    "version": "1.0"
+}

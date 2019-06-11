@@ -1,0 +1,263 @@
+{
+	"$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+	"type": "AdaptiveCard",
+	"version": "1.0",
+	"body": [
+          {
+            "type": "Container",
+            "items": [
+              {
+                "type": "TextBlock",
+                "size": "large",
+                "weight": "bolder",
+                "text": "International Phone Usage",
+                "horizontalAlignment": "center",
+                "speak": "<s>International Phone Usage</s>",
+                "height": "auto"
+              },
+              {
+                "type": "TextBlock",
+                "size": "extraLarge",
+                "weight": "bolder",
+                "text": "Request Form",
+                "horizontalAlignment": "center",
+                "speak": "<s>Request Form</s>",
+                "height": "auto"
+              },
+              {
+                "type": "TextBlock",
+                "text": "Select your destination country or countries:",
+                "height": "auto"
+              },
+              {
+                "type": "ColumnSet",
+                "columns": [
+                  {
+                    "type": "Column",
+                    "width": "auto",
+                    "items": [
+                      {
+                        "type": "Input.ChoiceSet",
+                        "id": "DestinationCountry_1",
+                        "value": "India",
+                        "style": "expanded",
+                        "isMultiSelect": true,
+                        "choices": [
+                          {
+                            "title": "United States",
+                            "value": "United States"
+                          },
+                          {
+                            "title": "United Kingdom",
+                            "value": "United Kingdom"
+                          },
+                          {
+                            "title": "Switzerland",
+                            "value": "Switzerland"
+                          },
+                          {
+                            "title": "Sweden",
+                            "value": "Sweden"
+                          },
+                          {
+                            "title": "Spain",
+                            "value": "Spain"
+                          },
+                          {
+                            "title": "South Africa",
+                            "value": "South Africa"
+                          },
+                          {
+                            "title": "Slovakia",
+                            "value": "Slovakia"
+                          },
+                          {
+                            "title": "Singapore",
+                            "value": "Singapore"
+                          },
+                          {
+                            "title": "Poland",
+                            "value": "Poland"
+                          },
+                          {
+                            "title": "Philippines",
+                            "value": "Philippines",
+                            "required": true
+                          }
+                        ],
+                        "speak": "<s>Select your Destination Country</s>",
+                        "height": "auto"
+                      }
+                    ],
+                    "height": "auto"
+                  },
+                  {
+                    "type": "Column",
+                    "width": "auto",
+                    "items": [
+                      {
+                        "type": "Input.ChoiceSet",
+                        "id": "DestinationCountry_2",
+                        "value": "India",
+                        "style": "expanded",
+                        "isMultiSelect": true,
+                        "choices": [
+                          {
+                            "title": "Norway",
+                            "value": "Norway"
+                          },
+                          {
+                            "title": "Netherlands",
+                            "value": "Netherlands"
+                          },
+                          {
+                            "title": "Morocco",
+                            "value": "Morocco"
+                          },
+                          {
+                            "title": "Mexico",
+                            "value": "Mexico"
+                          },
+                          {
+                            "title": "Malaysia",
+                            "value": "Malaysia"
+                          },
+                          {
+                            "title": "Japan",
+                            "value": "Japan"
+                          },
+                          {
+                            "title": "Italy",
+                            "value": "Italy"
+                          },
+                          {
+                            "title": "India",
+                            "value": "India"
+                          },
+                          {
+                            "title": "Germany",
+                            "value": "Germany"
+                          },
+                          {
+                            "title": "France",
+                            "value": "France"
+                          }
+                        ],
+                        "speak": "<s>Select your Destination Country</s>",
+                        "height": "auto"
+                      }
+                    ],
+                    "height": "auto"
+                  },
+                  {
+                    "type": "Column",
+                    "width": "auto",
+                    "items": [
+                      {
+                        "type": "Input.ChoiceSet",
+                        "id": "DestinationCountry_3",
+                        "value": "India",
+                        "style": "expanded",
+                        "isMultiSelect": true,
+                        "choices": [
+                          {
+                            "title": "Finland",
+                            "value": "Finland"
+                          },
+                          {
+                            "title": "Denmark",
+                            "value": "Denmark"
+                          },
+                          {
+                            "title": "China",
+                            "value": "China"
+                          },
+                          {
+                            "title": "Canada",
+                            "value": "Canada"
+                          },
+                          {
+                            "title": "Brazil",
+                            "value": "Brazil"
+                          },
+                          {
+                            "title": "Belgium",
+                            "value": "Belgium"
+                          },
+                          {
+                            "title": "Austria",
+                            "value": "Austria"
+                          },
+                          {
+                            "title": "Australia",
+                            "value": "Australia"
+                          },
+                          {
+                            "title": "Argentina",
+                            "value": "Argentina"
+                          }
+                        ],
+                        "speak": "<s>Select your Destination Country</s>",
+                        "height": "auto"
+                      }
+                    ],
+                    "height": "auto"
+                  }
+                ],
+                "height": "auto"
+              },
+              {
+                "type": "TextBlock",
+                "text": "Select Departure Date:",
+                "height": "auto"
+              },
+              {
+                "type": "Input.Date",
+                "id": "DepartureDate",
+                "placeholder": "1968-03-05",
+                "value": "2018-12-20",
+                "height": "auto"
+              },
+              {
+                "type": "TextBlock",
+                "text": "Select Return Date:",
+                "height": "auto"
+              },
+              {
+                "type": "Input.Date",
+                "id": "ReturnDate",
+                "placeholder": "",
+                "value": "2018-12-20",
+                "height": "auto"
+              }
+            ],
+            "height": "auto"
+          }
+        ],
+	"actions": [
+          {
+            "type": "Action.Submit",
+            "data": {
+              "Type": "SubmitRequest"
+            },
+            "title": "Submit Request",
+            "speak": "<s>Submit Request</s>"
+          },
+          {
+            "type": "Action.Submit",
+            "data": {
+              "Type": "OtherHelpOptions"
+            },
+            "title": "Other help options",
+            "speak": "<s>Other help options</s>"
+          },
+          {
+            "type": "Action.Submit",
+            "data": {
+              "Type": "CancelRequest"
+            },
+            "title": "No, thank you",
+            "speak": "<s>No, thank you</s>"
+          }
+        ]
+}

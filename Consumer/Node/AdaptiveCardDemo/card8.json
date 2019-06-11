@@ -1,0 +1,32 @@
+{
+    "type": "AdaptiveCard",
+    "selectAction": {
+        "type": "Action.OpenUrl",
+        "title": "Google",
+        "url": "http://www.google.com"
+    },
+    "backgroundImage": "https://image.flaticon.com/icons/svg/174/174838.svg",
+    "body": [
+        {
+            "type": "TextBlock",
+            "size": "Large",
+            "weight": "Bolder",
+            "text": "Try [BING](http://www.bing.com)"
+        },
+        {
+            "type": "TextBlock",
+            "text": "Try [BING](http://www.bing.com)"
+        }
+    ],
+    "actions": [
+        {
+            "type": "Action.OpenUrl",
+            "title": "Action.OpenUrl",
+            "iconUrl": "https://www.biography.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cg_face%2Cq_auto:good%2Cw_300/MTIwNjA4NjMzNTE5NzAzNTY0/caesar-augustus-39561-1-402.jpg",
+            "url": "http://www.octavianit.com"
+        }
+    ],
+    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+    "version": "1.0",
+    "fallbackText": "Fallback text."
+}
