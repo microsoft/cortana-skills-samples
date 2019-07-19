@@ -27,7 +27,7 @@ _Note: Enterprise skills tools and support are only offered to partners in Micro
 
 ## Consumer ##
 
-### CSharp ###
+### C# ###
 Task | Description | Action 
 ------------ | ------------- | :-----------:
 Getting Started | A basic Hello World skill. | [View Sample](/Consumer/CSharp/HelloWorldSkill)
@@ -49,7 +49,7 @@ V4Patches | Diff files for key [bot samples](https://github.com/Microsoft/BotBui
 
 
 ## Enterprise ##
-_This section is coming soon. Cortana Skills Kit for Enterprise is in the Technology Adoption program. Visit [this link](https://docs.microsoft.com/cortana/enterprise/overview) for more details._
+_This section is coming. Cortana Skills Kit for Enterprise is in the Technology Adoption program. Visit [this link](https://docs.microsoft.com/cortana/enterprise/overview) for more details._
 
 # Support #
 
